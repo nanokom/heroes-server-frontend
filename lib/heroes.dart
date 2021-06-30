@@ -14,19 +14,17 @@ class Heroes extends StatelessWidget {
         title: Text("Heroes"),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              Navigator.push (
-              context,
-                MaterialPageRoute(builder: (context) => CreateHero())
-              );
-            }
-          )
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CreateHero()));
+              })
         ],
       ),
       body: FutureBuilder(
         future: httpService.getHeroes(),
-        builder: (BuildContext context, AsyncSnapshot<List<GetHeroes.Hero>> snapshot) {
+        builder: (BuildContext context,
+            AsyncSnapshot<List<GetHeroes.Hero>> snapshot) {
           if (snapshot.hasData) {
             List<GetHeroes.Hero> posts = snapshot.data;
             return ListView(
@@ -34,7 +32,7 @@ class Heroes extends StatelessWidget {
                   .map(
                     (GetHeroes.Hero hero) => ListTile(
                       title: Text(hero.name),
-                      subtitle: Text("ID:  ${hero.id}"),
+                      subtitle: Text("ID: ${hero.id}"),
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => HeroDetail(
@@ -42,7 +40,7 @@ class Heroes extends StatelessWidget {
                           ),
                         ),
                       ),
-                     ),
+                    ),
                   )
                   .toList(),
             );
@@ -54,6 +52,3 @@ class Heroes extends StatelessWidget {
     );
   }
 }
-
-
-
